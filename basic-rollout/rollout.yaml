@@ -15,10 +15,12 @@ spec:
   selector:
     matchLabels:
       app: rollouts-demo
+      app.kubernetes.io/instance: rollouts-demo
   template:
     metadata:
       labels:
         app: rollouts-demo
+        app.kubernetes.io/instance: rollouts-demo
     spec:
       containers:
       - name: rollouts-demo
