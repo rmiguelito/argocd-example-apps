@@ -14,6 +14,7 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
+      
       app: rollouts-demo
       app.kubernetes.io/instance: rollouts-demo
   template:
