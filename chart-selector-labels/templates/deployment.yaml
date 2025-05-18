@@ -9,18 +9,21 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-{{- $existing := (lookup "apps/v1" "Deployment" .Release.Namespace .Release.Name) }}
-{{- if $existing }}
-{{ toYaml $existing.spec.selector.matchLabels | indent 6 }}
-{{- else }}
+      {{- if eq .Values.selectorType "migration" }}
+      app: {{ .Release.Name }}
+      {{- else }}
+      app.kubernetes.io/name: {{ .Chart.Name }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-      app.kubernetes.io/name: nginx
-{{- end }}
+      {{- end }}
   template:
     metadata:
       labels:
+        {{- if eq .Values.selectorType "migration" }}
+        app: {{ .Release.Name }}
+        {{- else }}
+        app.kubernetes.io/name: {{ .Chart.Name }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/name: nginx
+        {{- end }}
     spec:
       containers:
         - name: nginx
