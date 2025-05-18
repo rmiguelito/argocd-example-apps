@@ -10,7 +10,6 @@ spec:
   selector:
     matchLabels:
       app: my-app-nginx
-      app.kubernetes.io/instance: my-app-nginx
   template:
     metadata:
       labels:
