@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: my-app-nginx
   namespace: default  
   labels:
-    app.kubernetes.io/instance: my-app
+    app.kubernetes.io/instance: my-app-nginx
 spec:
-  replicas: 2
+  replicas: 10
   selector:
     matchLabels:
-      app: my-app
+      app: my-app-nginx
   template:
     metadata:
       labels:
-        app: my-app
-        app.kubernetes.io/instance: my-app
+        app: my-app-nginx
+        app.kubernetes.io/instance: my-app-nginx
     spec:
       containers:
-        - name: my-app
+        - name: my-app-nginx
           image: argoproj/rollouts-demo:blue
           ports:
             - containerPort: 8080
@@ -25,14 +25,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app
+  name: my-app-nginx
   namespace: default
   labels:
-    app.kubernetes.io/instance: my-app
+    app.kubernetes.io/instance: my-app-nginx
 spec:
   type: ClusterIP
   selector:
-    app: my-app
+    app: my-app-nginx
   ports:
     - port: 8080
       targetPort: 8080
