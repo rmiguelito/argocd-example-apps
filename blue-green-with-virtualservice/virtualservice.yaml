@@ -4,7 +4,7 @@ metadata:
   name: my-bg-virtualservice
 spec:
   hosts:
-    - my-bg.local.io
+    - my-bg-virtualservice
   http:
     - name: http
       route:
