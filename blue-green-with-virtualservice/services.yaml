@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-bg-virtualservice-stable
+spec:
+  selector:
+    app: my-bg-virtualservice
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-bg-virtualservice-preview
+spec:
+  selector:
+    app: my-bg-virtualservice
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
