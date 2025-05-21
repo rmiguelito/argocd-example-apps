@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: my-bg-virtualservice
+spec:
+  hosts:
+    - my-bg.local.io
+  http:
+    - name: http
+      route:
+        - destination:
+            host: my-bg-virtualservice-preview
+          weight: 0
+        - destination:
+            host: my-bg-virtualservice-stable
+          weight: 100
