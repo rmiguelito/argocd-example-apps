@@ -209,9 +209,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/fake/repo
+    repoURL: https://github.com/rmiguelito/argocd-example-apps.git
     targetRevision: HEAD
-    path: .
+    path: istio-full
   destination:
     server: https://kubernetes.default.svc
     namespace: demo-mesh
@@ -232,9 +232,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/fake/repo
+    repoURL: https://github.com/rmiguelito/argocd-example-apps.git
     targetRevision: HEAD
-    path: .
+    path: istio-full
   destination:
     server: https://kubernetes.default.svc
     namespace: demo-mesh
