@@ -13,12 +13,13 @@ spec:
     metadata:
       labels:
         app: app-a
-  spec:
-    containers:
-      - name: app-a
-        image: argoproj/rollouts-demo:blue
-        ports:
-          - containerPort: 8080
+        version: stable
+    spec:
+      containers:
+        - name: app-a
+          image: argoproj/rollouts-demo:blue
+          ports:
+            - containerPort: 8080
   strategy:
     canary:
       stableService: app-a-stable
@@ -44,6 +45,7 @@ metadata:
 spec:
   selector:
     app: app-a
+    version: stable
   ports:
     - port: 80
       targetPort: 8080
@@ -57,6 +59,7 @@ metadata:
 spec:
   selector:
     app: app-a
+    version: canary
   ports:
     - port: 80
       targetPort: 8080
@@ -70,14 +73,16 @@ metadata:
   namespace: demo-mesh
 spec:
   hosts:
-    - app-a.local
+    - app-a.demo-mesh.svc.cluster.local
   http:
     - route:
         - destination:
-            host: app-a-stable
+            host: app-a.demo-mesh.svc.cluster.local
+            subset: stable
           weight: 100
         - destination:
-            host: app-a-canary
+            host: app-a.demo-mesh.svc.cluster.local
+            subset: canary
           weight: 0
 
 ---
@@ -87,12 +92,11 @@ metadata:
   name: app-a-dr
   namespace: demo-mesh
 spec:
-  host: app-a-stable
----
-apiVersion: networking.istio.io/v1beta1
-kind: DestinationRule
-metadata:
-  name: app-a-canary-dr
-  namespace: demo-mesh
-spec:
-  host: app-a-canary
+  host: app-a.demo-mesh.svc.cluster.local
+  subsets:
+    - name: stable
+      labels:
+        version: stable
+    - name: canary
+      labels:
+        version: canary
