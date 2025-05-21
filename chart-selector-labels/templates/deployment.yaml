@@ -19,7 +19,7 @@ spec:
     metadata:
       labels:
         {{- if eq .Values.selectorType "migration" }}
-        app: {{ .Release.Name }}
+        app1: {{ .Release.Name }}
         {{- else }}
         app.kubernetes.io/name: {{ .Chart.Name }}
         app.kubernetes.io/instance: {{ .Release.Name }}
