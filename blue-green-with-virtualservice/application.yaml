@@ -10,5 +10,5 @@ spec:
     targetRevision: HEAD
     path: blue-green-with-virtualservice
   destination:
-    server: https://192.168.0.5:6443
+    server: https://kubernetes.default.svc
     namespace: default
