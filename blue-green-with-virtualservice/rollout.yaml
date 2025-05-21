@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-bg-virtualservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-bg-virtualservice
+  template:
+    metadata:
+      labels:
+        app: my-bg-virtualservice
+    spec:
+      containers:
+      - name: my-bg-virtualservice
+        image: argoproj/rollouts-demo:green
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 5m        
+  strategy:
+    canary:
+      steps:
+        - setWeight: 59
+        - pause: {}
+        - setWeight: 100
+      trafficRouting:
+        istio:
+          virtualService:
+            name: my-bg-virtualservice
+            routes:
+              - http
+      stableService: my-bg-virtualservice-stable
+      canaryService: my-bg-virtualservice-preview
