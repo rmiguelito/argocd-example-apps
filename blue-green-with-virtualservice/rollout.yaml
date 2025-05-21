@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-bg-virtualservice
-        image: argoproj/rollouts-demo:green
+        image: argoproj/rollouts-demo:blue
         ports:
         - name: http
           containerPort: 8080
