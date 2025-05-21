@@ -19,6 +19,7 @@ spec:
       activeService: {{ template "helm-guestbook.fullname" . }}
       previewService: {{ template "helm-guestbook.fullname" . }}-preview
       autoPromotionEnabled: false
+      scaleDownDelayRevisionLimit: 3
   template:
     metadata:
       labels:
