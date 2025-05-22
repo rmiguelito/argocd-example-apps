@@ -13,7 +13,6 @@ spec:
     metadata:
       labels:
         app: app-a
-        version: stable
     spec:
       containers:
         - name: app-a
@@ -29,11 +28,11 @@ spec:
           virtualService:
             name: app-a-vs
             routes:
-              - http
+              - primary
       steps:
-        - setWeight: 50
-        - pause: { duration: 30s }
-        - setWeight: 100
+      - setWeight: 5
+      - pause:
+          duration: 10m
 
 ---
 # --- Services for App A ---
@@ -45,7 +44,6 @@ metadata:
 spec:
   selector:
     app: app-a
-    version: stable
   ports:
     - port: 80
       targetPort: 8080
@@ -59,7 +57,6 @@ metadata:
 spec:
   selector:
     app: app-a
-    version: canary
   ports:
     - port: 80
       targetPort: 8080
@@ -72,31 +69,32 @@ metadata:
   name: app-a-vs
   namespace: demo-mesh
 spec:
+  gateways:
+  - istio-rollout-gateway
   hosts:
-    - app-a.demo-mesh.svc.cluster.local
+  - app-a.demo-mesh.svc.cluster.local
   http:
-    - route:
-        - destination:
-            host: app-a.demo-mesh.svc.cluster.local
-            subset: stable
-          weight: 100
-        - destination:
-            host: app-a.demo-mesh.svc.cluster.local
-            subset: canary
-          weight: 0
+  - name: primary        # referenced in canary.trafficRouting.istio.virtualService.routes
+    route:
+    - destination:
+        host: app-a-stable # referenced in canary.stableService
+      weight: 100
+    - destination:
+        host: app-a-canary # referenced in canary.canaryService
+      weight: 0
 
 ---
-apiVersion: networking.istio.io/v1beta1
-kind: DestinationRule
-metadata:
-  name: app-a-dr
-  namespace: demo-mesh
-spec:
-  host: app-a.demo-mesh.svc.cluster.local
-  subsets:
-    - name: stable
-      labels:
-        version: stable
-    - name: canary
-      labels:
-        version: canary
+# apiVersion: networking.istio.io/v1beta1
+# kind: DestinationRule
+# metadata:
+#   name: app-a-dr
+#   namespace: demo-mesh
+# spec:
+#   host: app-a.demo-mesh.svc.cluster.local
+#   subsets:
+#     - name: stable
+#       labels:
+#         version: stable
+#     - name: canary
+#       labels:
+#         version: canary
