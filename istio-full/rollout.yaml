@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: app-a
-          image: argoproj/rollouts-demo:green
+          image: curlimages/curl:latest
+
           ports:
             - containerPort: 8080
   strategy:
@@ -84,17 +85,14 @@ spec:
       weight: 0
 
 ---
-# apiVersion: networking.istio.io/v1beta1
-# kind: DestinationRule
-# metadata:
-#   name: app-a-dr
-#   namespace: demo-mesh
-# spec:
-#   host: app-a.demo-mesh.svc.cluster.local
-#   subsets:
-#     - name: stable
-#       labels:
-#         version: stable
-#     - name: canary
-#       labels:
-#         version: canary
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-a
+  namespace: demo-mesh
+spec:
+  selector:
+    app: app-a
+  ports:
+    - port: 80
+      targetPort: 8080
