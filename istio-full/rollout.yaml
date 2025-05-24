@@ -14,6 +14,7 @@ spec:
       labels:
         app: app-a
         xds: canary
+        a: a
     spec:
       containers:
         - name: app-a
