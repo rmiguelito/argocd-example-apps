@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: app-a
+        xds: canary
     spec:
       containers:
         - name: app-a
