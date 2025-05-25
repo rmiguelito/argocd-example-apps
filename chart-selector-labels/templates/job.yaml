@@ -3,7 +3,8 @@ kind: Job
 metadata:
   name: delete-hpa
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   ttlSecondsAfterFinished: 90
   template:
