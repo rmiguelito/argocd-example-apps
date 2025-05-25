@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/name: {{ .Release.Name }}
     app: {{ .Release.Name }}
-    teste: teste
+    teste: teste1
   annotations:
     app: {{ .Release.Name }}  
 spec:
