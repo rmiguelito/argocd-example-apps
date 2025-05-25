@@ -10,5 +10,5 @@ spec:
       containers:
       - name: sleep
         image: busybox
-        command: ["sh", "-c", "echo Simulando delay... && sleep 30"]
+        command: ["sh", "-c", "test $((RANDOM % 2)) -eq 0 && exit 1 || echo Sucesso"]
       restartPolicy: Never
