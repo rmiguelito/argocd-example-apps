@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wait-before-sync
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+spec:
+  template:
+    spec:
+      containers:
+      - name: sleep
+        image: busybox
+        command: ["sh", "-c", "echo Simulando delay... && sleep 60"]
+      restartPolicy: Never
