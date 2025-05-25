@@ -4,7 +4,10 @@ metadata:
   name: {{ .Release.Name }}
   labels:
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/name: nginx
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app: {{ .Release.Name }}
+  annotations:
+    app: {{ .Release.Name }}      
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
