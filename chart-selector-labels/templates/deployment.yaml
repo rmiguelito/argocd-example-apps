@@ -40,4 +40,4 @@ spec:
               port: 80
             failureThreshold: 30
             periodSeconds: 10
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
