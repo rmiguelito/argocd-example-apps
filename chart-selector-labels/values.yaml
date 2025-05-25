@@ -1,6 +1,6 @@
 replicaCount: 1
 service:
-  type: ClusterIP
+  type: ClusterIP11
 
 selectorType: creation
 #selectorType: migration
