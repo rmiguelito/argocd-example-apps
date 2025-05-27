@@ -1,0 +1,36 @@
+name: Deploy Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Build Script
+        run: echo "Building the application..."
+
+  deploy-staging:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Deploy to Staging
+        run: echo "Deploying to staging environment..."
+
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://your-production-url.com
+      # This enables manual approval
+      deployment_branch_policy: true
+    steps:
+      - name: Deploy to Production
+        run: echo "Deploying to production environment..."
