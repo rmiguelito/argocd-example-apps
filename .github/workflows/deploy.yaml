@@ -1,9 +1,16 @@
 name: Deploy Workflow
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
 
 jobs:
   build:
@@ -29,8 +36,6 @@ jobs:
     environment:
       name: production
       url: https://your-production-url.com
-      # This enables manual approval
-      deployment_branch_policy: true
     steps:
       - name: Deploy to Production
         run: echo "Deploying to production environment..."
