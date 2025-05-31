@@ -7,10 +7,10 @@ spec:
   strategy:
     canary:
       steps:
-      - setWeight: 10
-      - pause: {}
-      - setWeight: 80
-      - pause: {}
+        - setWeight: 10
+        - pause: {}
+        - setWeight: 80
+        - pause: {}
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -23,12 +23,12 @@ spec:
         app.kubernetes.io/instance: my-app-nginx
     spec:
       containers:
-      - name: my-app-nginx
-        image: argoproj/rollouts-demo:green
-        ports:
-        - name: http
-          containerPort: 8080
-          protocol: TCP
+        - name: my-app-nginx
+          image: argoproj/rollouts-demo:green
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
           resources:
             requests:
               cpu: 100m
