@@ -18,6 +18,6 @@ spec:
     canary:
       steps:
         - setWeight: 50
-        - pause: {}
-        - setWeight: 50
-        - pause: {}
+        - pause: {duration: 30s}  # Pause for 30 seconds before proceeding
+        - setWeight: 100
+        - pause: {duration: 60s}  # Pause for 60 seconds after reaching 100%
