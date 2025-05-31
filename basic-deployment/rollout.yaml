@@ -1,17 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: rollouts-demo
+  name: my-app-nginx
 spec:
-  replicas: 2
+  replicas: 6
   strategy:
     canary:
       steps:
-        - setWeight: 10
-        - pause: {}
-        - setWeight: 80
-        - pause: {}
-  revisionHistoryLimit: 2
+        - setWeight: 50
+        - pause: {duration: 30s}  # Pause for 30 seconds before proceeding
+        - setWeight: 100
+        - pause: {duration: 60s}  # Pause for 60 seconds after reaching 100%
   selector:
     matchLabels:
       app: my-app-nginx
