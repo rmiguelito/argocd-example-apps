@@ -4,13 +4,6 @@ metadata:
   name: my-app-nginx
 spec:
   replicas: 2
-  strategy:
-    canary:
-      steps:
-        - setWeight: 10
-        - pause: {}
-        - setWeight: 80
-        - pause: {}
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -21,3 +14,10 @@ spec:
     kind: Deployment
     name: my-app-nginx
     scaleDown: onsuccess
+  strategy:
+    canary:
+      steps:
+        - setWeight: 10
+        - pause: {}
+        - setWeight: 80
+        - pause: {}
