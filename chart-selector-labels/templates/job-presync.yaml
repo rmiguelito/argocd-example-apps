@@ -12,5 +12,5 @@ spec:
       containers:
       - name: sleep
         image: busybox
-        command: ["sh", "-c", "echo Simulando delay... && sleep 30"]
+        command: ["sh", "-c", "echo Simulando delay... && sleep 15"]
       restartPolicy: Never
