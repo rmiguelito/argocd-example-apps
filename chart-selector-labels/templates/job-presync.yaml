@@ -6,6 +6,7 @@ metadata:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded,HookFailed
 spec:
+  ttlSecondsAfterFinished: 30
   template:
     spec:
       containers:
