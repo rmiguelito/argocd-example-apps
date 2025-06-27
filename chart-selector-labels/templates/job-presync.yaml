@@ -4,13 +4,12 @@ metadata:
   name: wait-before-sync
   generateName: integration-test-
   annotations:
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/hook: Sync
 spec:
   template:
     spec:
       containers:
       - name: sleep
         image: busybox
-        command: ["sh", "-c", "echo Simulando delay... && sleep 15"]
+        command: ["sh", "-c", "echo Simulando delay... && sleep 3"]
       restartPolicy: Never
