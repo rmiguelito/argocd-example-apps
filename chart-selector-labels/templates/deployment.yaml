@@ -18,6 +18,7 @@ spec:
       {{- else }}
       app.kubernetes.io/name: {{ .Chart.Name }}
       app.kubernetes.io/instance: {{ .Release.Name }}
+      vai: vai
       {{- end }}
   template:
     metadata:
