@@ -10,7 +10,7 @@ metadata:
   annotations:
     app: {{ .Release.Name }}      
 spec:
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
