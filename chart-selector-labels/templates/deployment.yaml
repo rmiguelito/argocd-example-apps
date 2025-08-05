@@ -41,3 +41,6 @@ spec:
             failureThreshold: 30
             periodSeconds: 11
             initialDelaySeconds: 30
+          env:
+            - name: APP_REVISION
+              value: xpto
