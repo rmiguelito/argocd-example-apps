@@ -2,6 +2,6 @@ replicaCount: 1
 service:
   type: ClusterIP
 selectorType: creation
-#selectorType: migration
+appRevision: xpto
 
 
