@@ -43,4 +43,4 @@ spec:
             initialDelaySeconds: 30
           env:
             - name: APP_REVISION
-              value: sfsf
+              value: sfsfsfs
